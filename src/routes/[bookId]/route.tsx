@@ -10,7 +10,7 @@ import './route.scss'
 export const detailsLoader = async ({
 	params: { bookId }
 }: LoaderFunctionArgs) => {
-	const id = bookId && bookId.split('-')[0]
+	const id = bookId?.split('-')[0]
 	if (!id) return null
 	const book = await get(id)
 	return book
@@ -126,8 +126,8 @@ export function ErrorLoadingBookDetails() {
 				There something wrong with the server. Can not get data for the book.
 			</div>
 			<div className="btn-group">
-				<button className="btn go-back" onClick={() => navigate(-1)}>Go Back</button>
-				<button className="btn go-home" onClick={() => navigate('/')}>Go Home</button>
+				<button type="button" className="btn go-back" onClick={() => navigate(-1)}>Go Back</button>
+				<button type="button" className="btn go-home" onClick={() => navigate('/')}>Go Home</button>
 			</div>
 		</div>
 	)

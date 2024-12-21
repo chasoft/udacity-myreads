@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
-import { type ActionFunctionArgs, LoaderFunctionArgs, useFetcher, useLoaderData } from 'react-router'
+import { type ActionFunctionArgs, type LoaderFunctionArgs, useFetcher, useLoaderData } from 'react-router'
 
-import { Book } from '../../shared/types'
+import type { Book } from '../../shared/types'
 import { Bookshelf } from '../../components/Bookshelf'
 import { GoHomeButton } from '../../components/GoHomeButton'
 import { search } from '../../shared/BookAPI'
@@ -50,7 +50,6 @@ export function SearchPage() {
 	const booksFromAction = fetcher.data ?? []
 
 	const books = booksFromLoader || booksFromAction || []
-	console.log(books)
 
 	return (
 		<main className="myreads-search">

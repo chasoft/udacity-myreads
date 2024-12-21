@@ -1,6 +1,6 @@
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import slugify from "slugify";
 
 import type { Book } from "../shared/types"
@@ -13,7 +13,7 @@ type BookProps = {
 }
 
 export function BookInfo({ book }: BookProps) {
-	const linkToDetails = `/${book.id}-${slugify(book.title ?? book.subtitle)}`
+	const linkToDetails = `/view/${book.id}-${slugify(book.title ?? book.subtitle)}`
 	return (
 		<div className="book">
 			<div className="image-group">
@@ -36,20 +36,16 @@ type ChangeShelfButtonProps = {
 
 function ChangeShelfButton({ book }: ChangeShelfButtonProps) {
 	const [isOpen, setIsOpen] = useState(false)
-	const actionButtonRef = useRef<HTMLDivElement>(null);
 	return (
-		<div
+		<button
+			type="button"
 			tabIndex={0}
+			title="ShelfChanger"
 			className="action-button"
-			onFocus={() => setIsOpen(true)}
-			onBlur={(e) => {
-				if (actionButtonRef.current && !actionButtonRef.current.contains(e.relatedTarget as Node)) {
-					setIsOpen(false);
-				}
-			}}
+			onClick={() => setIsOpen(v => !v)}
 		>
 			<IoIosArrowDown />
 			<MovingPopup book={book} open={isOpen} toggle={setIsOpen} />
-		</div>
+		</button>
 	)
 }

@@ -4,6 +4,7 @@ import { homeAction, HomePage } from "./home/route";
 import { searchAction, searchLoader, SearchPage } from "./search/route";
 import { BookDetails, detailsLoader, ErrorLoadingBookDetails } from "./[bookId]/route";
 import { RootLayout, rootLoader } from "./Layout";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 export const appRouter = createBrowserRouter([
 	{
@@ -11,6 +12,7 @@ export const appRouter = createBrowserRouter([
 		path: '/',
 		element: <RootLayout />,
 		loader: rootLoader,
+		ErrorBoundary: ErrorBoundary,
 		children: [
 			{
 				id: 'home-page',
@@ -20,7 +22,7 @@ export const appRouter = createBrowserRouter([
 			},
 			{
 				id: 'book-details',
-				path: '/:bookId',
+				path: '/view/:bookId',
 				element: <BookDetails />,
 				loader: detailsLoader,
 				errorElement: <ErrorLoadingBookDetails />

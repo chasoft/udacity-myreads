@@ -1,4 +1,4 @@
-import { useFetcher } from 'react-router'
+import { useFetcher, useOutletContext } from 'react-router'
 import { useCallback, type ChangeEvent } from 'react'
 
 import type { Book } from '../shared/types'
@@ -19,6 +19,9 @@ type MovingPopupProps = {
 }
 
 export function MovingPopup({ book, open, toggle }: MovingPopupProps) {
+	const allBooks = useOutletContext() as Book[]
+	const shelf = allBooks.find(({ id }) => id === book.id)?.shelf ?? 'none'
+
 	const fetcher = useFetcher()
 
 	const onShelfChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
@@ -28,16 +31,23 @@ export function MovingPopup({ book, open, toggle }: MovingPopupProps) {
 		formData.append('bookId', book.id)
 		fetcher.submit(formData, { method: 'post', action: '/' });
 		toggle(v => !v)
-		console.log("onShelfChange")
 	}, [fetcher, toggle, book.id]);
 
 	if (!open) return null
 
 	return (
-		<div className="book-shelf-changer">
+		// biome-ignore lint/a11y/useKeyWithClickEvents: a tricky for my simple popup
+		<div className="book-shelf-changer" onClick={(e) => { e.stopPropagation() }}>
 			<fetcher.Form method="post" action="/">
-				<select name="shelf" title='Organizing book' value={book.shelf} onChange={onShelfChange}>
-					<option value="none" disabled>
+				<select
+					name="shelf"
+					title='Organizing book'
+					value={shelf}
+					onChange={onShelfChange}
+					onBlur={() => toggle(v => !v)}
+					ref={(el) => { el?.focus() }}
+				>
+					<option value="no-used-value" disabled>
 						Move to...
 					</option>
 					{OPTIONS.map(option =>
