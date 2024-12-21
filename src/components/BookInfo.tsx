@@ -1,12 +1,12 @@
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router";
+import { useRef, useState } from "react";
 import slugify from "slugify";
 
 import type { Book } from "../shared/types"
+import { MovingPopup } from "./MovingPopup";
 
 import './BookInfo.scss'
-import { MovingPopup } from "./MovingPopup";
-import { useRef, useState } from "react";
 
 type BookProps = {
 	book: Book
