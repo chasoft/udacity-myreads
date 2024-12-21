@@ -1,0 +1,15 @@
+.book-shelf {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+	gap: 2rem;
+
+	.book-grid {
+		display: grid;
+		align-items: end;
+		grid-template-columns: repeat(auto-fill, minmax(var(--min-col-size), 1fr));
+		column-gap: 0.5rem;
+	}
+}

@@ -1,0 +1,26 @@
+.search-button-wrapper {
+	position: fixed;
+	right: 50px;
+	bottom: 50px;
+
+	.search-button {
+		padding: 10px;
+		border-radius: 50%;
+		color: white;
+		background: green;
+		cursor: pointer;
+
+		&:hover {
+			background: rgb(11, 88, 11);
+		}
+
+		&:active {
+			background: rgb(3, 43, 3);
+		}
+
+		svg {
+			width: 20px;
+			height: 20px;
+		}
+	}
+}

@@ -1,0 +1,11 @@
+.go-home-button {
+	padding: 10px;
+	border: 1px solid gray;
+	border-radius: var(--spacing);
+	svg {
+		width: 20px;
+		min-width: 20px;
+		height: 20px;
+		min-height: 20px;
+	}
+}
